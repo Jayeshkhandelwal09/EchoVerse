@@ -11,6 +11,11 @@ const connectDB = require('./config/db');
 // Connect to MongoDB
 connectDB();
 
+// cron for sending email after everymin for those whose entries are unlocked
+const { setupUnlockNotifier } = require("./utils/cron/unlockNotifier");
+setupUnlockNotifier();
+
+
 // Define PORT
 const PORT = process.env.PORT || 5000;
 

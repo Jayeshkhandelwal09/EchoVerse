@@ -26,6 +26,10 @@ const entrySchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  isNotified: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model('Entry', entrySchema);
