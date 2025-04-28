@@ -7,8 +7,8 @@
 
 ## 🚀 Live Demo
 
-- **Frontend**: [https://your-frontend-url.vercel.app](https://echo-verse-five.vercel.app/))
-- **Backend**: [https://your-backend-url.onrender.com](https://echoverse-backend-dkc8.onrender.com)
+- **Frontend**: https://echo-verse-five.vercel.app/
+- **Backend**: https://echoverse-backend-dkc8.onrender.com
 
 ---
 
