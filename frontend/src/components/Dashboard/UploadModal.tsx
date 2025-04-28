@@ -26,7 +26,7 @@ const UploadModal = ({ onClose, onUploadSuccess }: UploadModalProps) => {
   const [isRecording, setIsRecording] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
   const [recordingPermission, setRecordingPermission] = useState<boolean | null>(null);
-  
+
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const timerRef = useRef<number | null>(null);
@@ -56,41 +56,41 @@ const UploadModal = ({ onClose, onUploadSuccess }: UploadModalProps) => {
   const startRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      
+
       const mediaRecorder = new MediaRecorder(stream);
       mediaRecorderRef.current = mediaRecorder;
       audioChunksRef.current = [];
-      
+
       mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
           audioChunksRef.current.push(event.data);
         }
       };
-      
+
       mediaRecorder.onstop = () => {
         const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-        const audioFile = new File([audioBlob], "recording.webm", { 
+        const audioFile = new File([audioBlob], "recording.webm", {
           type: "audio/webm",
-          lastModified: Date.now() 
+          lastModified: Date.now()
         });
-        
+
         setFormData(prev => ({ ...prev, audio: audioFile }));
-        
+
         const audioUrl = URL.createObjectURL(audioBlob);
         setAudioPreview(audioUrl);
-        
+
         stream.getTracks().forEach(track => track.stop());
       };
-      
+
       mediaRecorder.start();
       setIsRecording(true);
-      
+
       let seconds = 0;
       timerRef.current = window.setInterval(() => {
         seconds++;
         setRecordingTime(seconds);
       }, 1000);
-      
+
     } catch (err) {
       console.error("Error starting recording:", err);
       toast.error("Could not access microphone");
@@ -102,7 +102,7 @@ const UploadModal = ({ onClose, onUploadSuccess }: UploadModalProps) => {
     if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
       mediaRecorderRef.current.stop();
       setIsRecording(false);
-      
+
       if (timerRef.current) {
         window.clearInterval(timerRef.current);
         timerRef.current = null;
@@ -121,7 +121,7 @@ const UploadModal = ({ onClose, onUploadSuccess }: UploadModalProps) => {
     if (type === "file") {
       const file = files?.[0] || null;
       setFormData((prev) => ({ ...prev, audio: file }));
-      
+
       if (file) {
         const url = URL.createObjectURL(file);
         setAudioPreview(url);
@@ -138,13 +138,19 @@ const UploadModal = ({ onClose, onUploadSuccess }: UploadModalProps) => {
       return;
     }
 
+    const localUnlockDate = new Date(formData.unlockAt);
+    const utcISOString = localUnlockDate.toISOString();
+
+    
     try {
       setLoading(true);
       const submitFormData = new FormData();
       submitFormData.append("title", formData.title);
       submitFormData.append("mood", formData.mood);
-      submitFormData.append("unlockAt", formData.unlockAt);
+      submitFormData.append("unlockAt", utcISOString);
       submitFormData.append("audio", formData.audio);
+
+
 
       await createEntry(submitFormData);
       toast.success("Message sent to your future self!");
@@ -161,7 +167,7 @@ const UploadModal = ({ onClose, onUploadSuccess }: UploadModalProps) => {
   const moodOptions = ["😊 Happy", "😌 Calm", "🤔 Thoughtful", "🥳 Excited", "😢 Sad", "😴 Tired", "❤️ Loving", "😎 Cool"];
 
   const today = new Date();
-  const minDate = today 
+  const minDate = today
   const formatDateForInput = (date: Date) => {
     return date.toISOString().slice(0, 16);
   };
@@ -171,7 +177,7 @@ const UploadModal = ({ onClose, onUploadSuccess }: UploadModalProps) => {
       <div className="bg-gradient-to-br from-indigo-900/80 to-purple-900/90 p-1 rounded-2xl w-full max-w-md shadow-2xl" onClick={(e) => e.stopPropagation()}>
         <div className="bg-gray-900/70 backdrop-blur-md p-6 rounded-2xl border border-white/10">
           <h2 className="text-2xl font-bold text-center text-white mb-6">Message to Future You</h2>
-          
+
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="text-white/80 text-sm mb-1 block">How would you title this moment?</label>
@@ -191,7 +197,7 @@ const UploadModal = ({ onClose, onUploadSuccess }: UploadModalProps) => {
                 {moodOptions.map(mood => {
                   const moodEmoji = mood.split(' ')[0];
                   return (
-                    <button 
+                    <button
                       key={mood}
                       type="button"
                       onClick={() => setFormData(prev => ({ ...prev, mood: moodEmoji }))}
@@ -218,7 +224,7 @@ const UploadModal = ({ onClose, onUploadSuccess }: UploadModalProps) => {
 
             <div>
               <label className="text-white/80 text-sm mb-1 block">Your voice message</label>
-              
+
               {/* Voice recorder UI */}
               <div className="mb-4 rounded-xl overflow-hidden">
                 {recordingPermission === false ? (
@@ -245,7 +251,7 @@ const UploadModal = ({ onClose, onUploadSuccess }: UploadModalProps) => {
                           "Record a voice message"
                         )}
                       </div>
-                      
+
                       {isRecording ? (
                         <button
                           type="button"
@@ -267,16 +273,16 @@ const UploadModal = ({ onClose, onUploadSuccess }: UploadModalProps) => {
                         </button>
                       )}
                     </div>
-                    
+
                     {isRecording && (
                       <div className="mt-2">
                         <div className="flex justify-between space-x-1 h-8 items-end">
                           {/* Audio visualization bars (animation only) */}
                           {[...Array(20)].map((_, i) => (
-                            <div 
+                            <div
                               key={i}
                               className="bg-purple-500/80 rounded-sm w-1"
-                              style={{ 
+                              style={{
                                 height: `${20 + Math.random() * 60}%`,
                                 animationDuration: `${0.2 + Math.random() * 0.3}s`,
                                 animationDelay: `${i * 0.05}s`,
@@ -290,14 +296,14 @@ const UploadModal = ({ onClose, onUploadSuccess }: UploadModalProps) => {
                   </div>
                 )}
               </div>
-              
+
               {/* Option to upload file directly */}
               <div className="flex items-center justify-between mb-2">
                 <div className="h-px bg-gray-700 flex-grow"></div>
                 <span className="px-3 text-xs text-gray-400">OR</span>
                 <div className="h-px bg-gray-700 flex-grow"></div>
               </div>
-              
+
               <input
                 type="file"
                 name="audio"
@@ -305,7 +311,7 @@ const UploadModal = ({ onClose, onUploadSuccess }: UploadModalProps) => {
                 onChange={handleChange}
                 className="w-full p-3 bg-gray-800/50 border border-gray-700 rounded-xl text-white focus:border-purple-500 focus:ring focus:ring-purple-500/20 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-purple-600 file:text-white hover:file:bg-purple-700"
               />
-              
+
               {audioPreview && (
                 <div className="mt-3 p-3 bg-gray-800/30 rounded-xl">
                   <audio controls src={audioPreview} className="w-full" />
@@ -314,15 +320,15 @@ const UploadModal = ({ onClose, onUploadSuccess }: UploadModalProps) => {
             </div>
 
             <div className="flex space-x-3 pt-4">
-              <button 
-                type="button" 
-                onClick={onClose} 
+              <button
+                type="button"
+                onClick={onClose}
                 className="flex-1 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-xl transition"
               >
                 Cancel
               </button>
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={loading}
                 className="flex-1 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded-xl transition flex items-center justify-center"
               >
