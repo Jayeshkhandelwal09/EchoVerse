@@ -27,18 +27,18 @@ const LandingPage = () => {
             <span className="ml-2 text-2xl font-bold text-white">EchoVerse</span>
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center">
             <button
               onClick={() => navigate('/login')}
-              className="text-white hover:text-purple-200 transition">
+              className="text-white hover:text-purple-200 transition hidden sm:block">
               Login
             </button>
             <button
               onClick={() => navigate('/register')}
-              className="bg-white text-purple-600 px-4 py-2 rounded-lg font-medium hover:bg-purple-100 transition transform hover:scale-105 mr-2">
+              className="bg-white text-purple-600 px-4 py-2 rounded-lg font-medium hover:bg-purple-100 transition transform hover:scale-105 mx-10 sm:mx-4">
               Sign Up
             </button>
-            <div className="ml-2">
+            <div>
               <DarkModeToggle />
             </div>
           </div>

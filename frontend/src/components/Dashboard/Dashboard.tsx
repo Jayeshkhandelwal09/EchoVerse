@@ -107,8 +107,8 @@ const Dashboard = () => {
             <>
               <div className="flex items-center justify-between mb-8">
                 <h2 className="text-2xl font-semibold text-white">Your Time Capsules</h2>
-                <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-white/80 text-sm">
-                  {entries.length} {entries.length === 1 ? 'capsule' : 'capsules'} |        {entries.filter(entry => !entry.isUnlocked).length} waiting
+                <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-white/80 text-sm whitespace-nowrap">
+                  {entries.length} {entries.length === 1 ? 'capsule' : 'capsules'} ·        {entries.filter(entry => !entry.isUnlocked).length} waiting
 
                 </div>
             
