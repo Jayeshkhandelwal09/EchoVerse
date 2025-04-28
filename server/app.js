@@ -1,14 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 
+const authRoutes = require('./routes/authRoutes');
+
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
-// Routes (we will add later)
-// app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/auth', authRoutes);
 // app.use('/api/entries', require('./routes/entryRoutes'));
 
 // Home Route (temporary to check server)
