@@ -47,7 +47,6 @@ It’s more than an app — it’s **emotional time-traveling** made real ✨.
 - 🔒 Fully private and secure entries
 - 🌗 Toggle Dark Mode
 - 📩 Automatic Email Notification on Unlock
-- 📂 Timeline View — Grouped into Today, Upcoming, and Past
 - 🖥️ Fully Responsive for Mobile and Desktop
 - 🚀 Fast Deployment with Vercel and Render
 - ⚡ Cloudinary integration for audio storage
