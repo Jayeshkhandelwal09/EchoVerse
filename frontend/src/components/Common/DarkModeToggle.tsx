@@ -4,7 +4,6 @@ const DarkModeToggle = () => {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    // On mount, check localStorage
     const dark = localStorage.getItem("theme") === "dark";
     setIsDark(dark);
     if (dark) {

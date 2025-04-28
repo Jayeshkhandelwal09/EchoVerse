@@ -11,7 +11,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { user , loading} = useAuth();
 
   if (loading) {
-    return <Loader />; // ⏳ Show a loader while checking user
+    return <Loader />; 
   }
 
   if (!user) {

@@ -7,7 +7,6 @@ const LandingPage = () => {
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
 
-  // Handle scroll effect for navbar
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -19,7 +18,6 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-500 via-indigo-600 to-blue-500 dark:from-gray-900 dark:via-purple-950 dark:to-black overflow-x-hidden">
-      {/* Navbar */}
       <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/10 backdrop-blur-lg shadow-lg' : 'bg-transparent'}`}>
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center">
@@ -29,7 +27,6 @@ const LandingPage = () => {
             <span className="ml-2 text-2xl font-bold text-white">EchoVerse</span>
           </div>
 
-          {/* Update the navbar buttons container to fix the DarkModeToggle overlap */}
           <div className="flex items-center space-x-4">
             <button
               onClick={() => navigate('/login')}
@@ -51,17 +48,14 @@ const LandingPage = () => {
 
 
 
-      {/* Hero Section - Fixed to add proper mobile padding */}
       <section className="relative pt-24 md:pt-32 min-h-screen flex items-center justify-center px-4">
 
-        {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-purple-400/20 dark:bg-purple-800/20 blur-3xl animate-pulse"></div>
           <div className="absolute bottom-1/3 right-1/3 w-96 h-96 rounded-full bg-blue-400/20 dark:bg-blue-800/20 blur-3xl animate-pulse"></div>
         </div>
 
 
-        {/* Hero Content */}
         <div className="container mx-auto max-w-6xl grid md:grid-cols-2 gap-12 items-center">
           <div className="text-left mt-8 md:mt-0">
             <h1 className="text-5xl md:text-7xl font-extrabold text-white dark:text-gray-100 mb-6 leading-tight">
@@ -104,7 +98,6 @@ const LandingPage = () => {
             </div>
           </div>
 
-          {/* Glass Card Mockup */}
           <div className="backdrop-blur-xl bg-white/20 dark:bg-white/10 border border-white/30 dark:border-white/10 rounded-3xl p-8 shadow-2xl transform rotate-2 hover:rotate-0 transition-all duration-300">
             <div className="space-y-6">
               <div className="flex items-center space-x-2">
@@ -141,13 +134,11 @@ const LandingPage = () => {
           </div>
         </div>
 
-        {/* Subtle scroll indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
           <ChevronDown className="h-8 w-8 text-white/50" />
         </div>
       </section>
 
-      {/* Features Section */}
       <section className="py-24 bg-white/5 backdrop-blur-lg">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center text-white mb-16">Why Choose EchoVerse?</h2>
@@ -185,7 +176,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
       <section className="py-24">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center text-white mb-16">What Our Users Say</h2>
@@ -228,7 +218,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-16">
         <div className="container mx-auto px-6">
           <div className="backdrop-blur-xl bg-gradient-to-r from-purple-600/50 to-blue-600/50 dark:from-purple-900/50 dark:to-blue-900/50 rounded-3xl p-12 text-center">
@@ -255,7 +244,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="bg-black/30 backdrop-blur-md py-12">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
