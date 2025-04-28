@@ -7,9 +7,13 @@ const entryRoutes = require('./routes/entryRoutes');
 
 const app = express();
 
-// Middleware
+const allowedOrigins = [
+  "http://localhost:5173",    
+  "https://your-vercel-frontend-url.vercel.app",
+];
+
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: allowedOrigins,
   credentials: true, 
 }));
 app.use(express.json());
